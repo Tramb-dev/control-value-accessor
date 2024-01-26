@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   ControlValueAccessor,
   FormBuilder,
@@ -12,6 +12,7 @@ import { CustomInputComponent } from './custom-input/custom-input.component';
   selector: 'custom-comp',
   standalone: true,
   imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(blur)': '_onTouched()' },
   template: `
     Custom:
@@ -46,6 +47,7 @@ export class CustomComp implements ControlValueAccessor {
 @Component({
   selector: 'app-root',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, JsonPipe, CustomComp, CustomInputComponent],
   template: `<form [formGroup]="form">
       <app-custom-input formControlName="first" />
